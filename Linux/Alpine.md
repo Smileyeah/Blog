@@ -34,7 +34,7 @@ Error relocating libe_sqlite3.so: __memset_chk: symbol not found
 ```
 https://pkgs.alpinelinux.org/contents?file=ld-linux-*&path=&name=&branch=edge&repo=main
 
-### 解决方法：apk add --no-cache libc6-compat
+### 解决方法：需要安装libc6-compat包。制作镜像时加入apk add --no-cache libc6-compat
 
 2、运行时报错段错误：Segmentation fault (core dumped)，对崩溃产生的core文件进行gdb解析得到：
 ```
@@ -45,5 +45,6 @@ Thread 1 (LWP 52):
 #3  0x0000ffff7d6b2a94 in sqlite3JournalOpen () from /opt/ganwei/IoTCenter/bin/runtimes/linux-arm64/native/libe_sqlite3.so
 ```
 
-在libe_sqlite3.so的源码https://github.com/ericsink/cb地址找到issue。判断为CPU架构不匹配。
+在libe_sqlite3.so的源码地址(https://github.com/ericsink/cb)找到issue。
+判断为CPU架构不匹配。
 ### 解决方法：下载源码重新生成一个新的依赖库.
