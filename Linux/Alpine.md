@@ -45,6 +45,6 @@ Thread 1 (LWP 52):
 #3  0x0000ffff7d6b2a94 in sqlite3JournalOpen () from /opt/ganwei/IoTCenter/bin/runtimes/linux-arm64/native/libe_sqlite3.so
 ```
 
-在libe_sqlite3.so的源码地址(https://github.com/ericsink/cb) 找到issue。
-判断为CPU架构不匹配。
+在libe_sqlite3.so的源码地址 https://github.com/ericsink/cb 找到issue。判断为库与系统不匹配。   
+网上解释为Linux系统基于musl和systemd的问题引起。
 ### 解决方法：下载源码重新生成一个新的依赖库.
