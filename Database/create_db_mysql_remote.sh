@@ -8,10 +8,10 @@
 #
 #同时创建一个名为dbname的用户，对这个dbname库有所有权限。
 
-HOSTNAME="10.2.0.15" #数据库Server信息
+HOSTNAME="127.0.0.1" #数据库Server信息
 PORT="3306"
-USERNAME="root"
-PASSWORD="ganwei@123"
+USERNAME="user"
+PASSWORD="password"
 DBNAME=$1 #要创建的数据库的库名称
 MYSQL_CMD="mysql -h${HOSTNAME} -P${PORT} -u${USERNAME} -p${PASSWORD}"
 echo ${MYSQL_CMD}
