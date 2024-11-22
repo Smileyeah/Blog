@@ -1,5 +1,6 @@
-#### nginx做反向代理时的配置
+## nginx做反向代理时的配置
 
+### 转发http
 ```
 http {
   map $http_connection $connection_upgrade {
@@ -34,3 +35,36 @@ http {
 ```
 
 **此配置可转发signalR，且301跳转时正确跳转到非80代理端口**
+
+### 转发tcp端口
+
+在nginx的总配置文件nginx.conf增加stream类型的代理：
+```
+# /etc/nginx/conf.d/stream.conf
+
+# proxy mariadb
+stream {
+    upstream mariadb-backend {
+        server 10.0.0.51:3306;
+        server 10.0.0.52:3306;
+    }
+    server {
+        listen 3306;
+        proxy_pass mariadb-backend;
+    }
+}
+
+```
+
+```
+upstream gwc-lmt0ej5mntn2-3d {
+    server 10.0.0.17:30803;
+}
+server {
+    keepalive_requests 120;
+    listen       5789;
+    server_name  10.0.0.6;
+    proxy_pass  gwc-lmt0ej5mntn2-3d;
+}
+
+```
